@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WCW",
+    "LLL"
+  ],
+  "key": {  
+	"W": {
+      "item": "minecraft:netherite_ingot"
+    }, 
+	"C": {
+      "item": "auto_repair_kit:diamond_kit"
+    }, 
+	"L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "auto_repair_kit:netherite_kit"
+  }
+}

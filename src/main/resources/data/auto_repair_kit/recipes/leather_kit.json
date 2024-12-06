@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WCW",
+    "LLL"
+  ],
+  "key": {  
+	"W": {
+      "item": "minecraft:leather"
+    }, 
+	"C": {
+      "item": "minecraft:chest"
+    }, 
+	"L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "auto_repair_kit:leather_kit"
+  }
+}
