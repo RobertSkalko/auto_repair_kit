@@ -8,7 +8,7 @@ public class MixinConnector implements IMixinConnector {
     @Override
     public void connect() {
         Mixins.addConfiguration(
-                "temporary_spawners-mixins.json"
+                "auto_repair_kit-mixins.json"
         );
     }
 }

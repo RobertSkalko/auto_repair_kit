@@ -22,11 +22,14 @@ public class RepairUTIL {
 
                 var data = new RepairEventData(kit);
 
-                for (ItemStack gear : gears) {
-                    tryRepair(gear, data);
-                }
-                if (ModList.get().isLoaded("curios")) {
-                    CurioCompat.tryRepair(p, data);
+                if (data.charges > 0) {
+
+                    for (ItemStack gear : gears) {
+                        tryRepair(gear, data);
+                    }
+                    if (ModList.get().isLoaded("curios")) {
+                        CurioCompat.tryRepair(p, data);
+                    }
                 }
             }
         }

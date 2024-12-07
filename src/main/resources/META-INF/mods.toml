@@ -1,34 +1,34 @@
-modLoader="javafml" #mandatory
-loaderVersion="[36,)"
-license="All rights reserved"
-issueTrackerURL=""
+modLoader = "javafml" #mandatory
+loaderVersion = "[36,)"
+license = "All rights reserved"
+issueTrackerURL = ""
 [[mods]]
-modId="auto_repair_kit"
-version="1.5.1"
-displayName="Temporary Spawners"
+modId = "auto_repair_kit"
+version = "1.0.1"
+displayName = "Auto Repair Kits"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
 #displayURL="https://www.curseforge.com/minecraft/mc-mods/auto-repair-kits"
-logoFile="icon.png"
-credits=""
-authors="mcrobertx22"
-description='''
+logoFile = "icon.png"
+credits = ""
+authors = "mcrobertx22"
+description = '''
 Random quest mod themed around gods.
 '''
 [[dependencies.auto_repair_kit]]
-    modId="forge"
-    mandatory=true
-    versionRange="[36,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[36,)"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies.auto_repair_kit]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.20,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies.auto_repair_kit]]
-    modId="library_of_exile"
-    mandatory=true
-    versionRange="[1.3.0,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "library_of_exile"
+mandatory = true
+versionRange = "[1.3.0,)"
+ordering = "NONE"
+side = "BOTH"
