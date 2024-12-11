@@ -4,7 +4,7 @@ license = "All rights reserved"
 issueTrackerURL = ""
 [[mods]]
 modId = "auto_repair_kit"
-version = "1.0.1"
+version = "1.0.2"
 displayName = "Auto Repair Kits"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
 #displayURL="https://www.curseforge.com/minecraft/mc-mods/auto-repair-kits"

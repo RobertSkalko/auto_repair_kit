@@ -31,7 +31,9 @@ public class KitTooltips {
                 tip.add(Component.translatable("auto_repair_kit.charge_mats").withStyle(ChatFormatting.YELLOW));
 
                 for (Map.Entry<Item, Integer> en : KitConfig.get().getChargeMaterialMap().entrySet()) {
-                    tip.add(Component.literal(" - ").append(en.getKey().getDefaultInstance().getDisplayName()).append(": " + en.getValue()));
+                    var name = en.getKey().getDefaultInstance().getDisplayName();
+
+                    tip.add(Component.literal(" - ").append(name).append(": " + en.getValue()));
                 }
             }
         }

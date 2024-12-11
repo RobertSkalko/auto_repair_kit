@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 
 public class ComponentInit {
 
@@ -51,10 +52,9 @@ public class ComponentInit {
             if (num < 1) {
                 return;
             }
-
-
             if (kit.getItem() instanceof RepairKitItem rep) {
                 if (RepairUTIL.getCharges(kit) < rep.tier.getMax()) {
+                    material.shrink(1);
                     RepairUTIL.addCharges(kit, num, rep.tier);
 
                     SoundUtils.ding(player.level(), player.blockPosition());
@@ -63,7 +63,7 @@ public class ComponentInit {
                 }
             }
 
-        });
+        }, EventPriority.HIGHEST);
     }
 
 }

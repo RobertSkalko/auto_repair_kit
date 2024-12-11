@@ -114,9 +114,15 @@ public class RepairUTIL {
 
         float dura = 1F - after / (float) tier.getMax();
 
+        int dmg = (int) (stack.getMaxDamage() * dura);
+
+        if (dmg >= stack.getMaxDamage()) {
+            dmg = stack.getMaxDamage() - 1;
+        }
+
         stack.getOrCreateTag().putInt("charges", after);
 
-        stack.setDamageValue((int) (stack.getMaxDamage() * dura));
+        stack.setDamageValue(dmg);
 
     }
 }
