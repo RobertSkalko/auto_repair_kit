@@ -23,7 +23,10 @@ public class ComponentInit {
             if (!event.player.level().isClientSide) {
                 if (event.phase == TickEvent.Phase.END) {
                     Player p = event.player;
-
+                    
+                    if (p.isDeadOrDying()) {
+                        return;
+                    }
                     int interval = KitConfig.get().REPAIR_INTERVAL.get();
 
                     if (p.tickCount % (interval) == 0) {
@@ -39,6 +42,7 @@ public class ComponentInit {
             if (player.level().isClientSide) {
                 return;
             }
+
 
             ItemStack material = x.getStackedOnItem();
             ItemStack kit = x.getCarriedItem();

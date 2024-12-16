@@ -106,7 +106,8 @@ dependencies {
         annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     }
 
-    implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.3.1")
+    //implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.3.1")
+    implementation fg.deobf("blank:Library_of_Exile-1.20.1:${exile_library_version}")
 
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}") //Full for runtime
@@ -142,13 +143,19 @@ publishMods {
     type = BETA
     modLoaders.add("forge")
 
+    displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
+
     curseforge {
         accessToken = file("key.properties").text
         projectId = "${curse_id}"
-        displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
         minecraftVersions.add("${minecraft_version}")
         minecraftVersions.add("1.20")
-
         requires { slug = "library-of-exile" }
+    }
+    modrinth {
+        accessToken = file("modrinth_key.properties").text
+        projectId = "${modrinth_id}"
+        minecraftVersions.add("${minecraft_version}")
+        minecraftVersions.add("1.20")
     }
 }

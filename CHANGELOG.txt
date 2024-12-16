@@ -1,4 +1,4 @@
-v.1.0.2
+v.1.0.3
 
-- kits now actually consume materials
-- made kits first priority in interact event to fix a compat bug
+- switched to full release, as the beta didn't show any problems
+- stop repairing on dead players
