@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
@@ -17,145 +18,29 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
-    id "me.modmuss50.mod-publish-plugin" version "0.3.3"
+    id "me.modmuss50.mod-publish-plugin" version "${mod_publish_version}"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-archivesBaseName = "${mod_archive_name}-${minecraft_version}"
-version = project.mod_version
-group = project.maven_group
-
-minecraft {
-    //mappings channel: "snapshot", version: "20201028-1.16.3"
-
-    mappings channel: "${mapping_channel}", version: "${mapping_version}-${minecraft_version}"
-
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        client {
-            workingDirectory project.file('run')
-            arg "-mixin.config=${mod_id}-mixins.json"
-            // This makes dependencies with mixins work
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-            // This makes dependencies with mixins work
-            mods {
-                modid {
-                    source sourceSets.main
-                }
-            }
-        }
-        server {
-            workingDirectory project.file('run')
-            arg "-mixin.config=${mod_id}-mixins.json"
-            // This makes dependencies with mixins work
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-            // This makes dependencies with mixins work
-            mods {
-                modid {
-                    source sourceSets.main
-                }
-            }
-        }
-        data {
-            workingDirectory project.file('run')
-            arg "-mixin.config=${mod_id}-mixins.json"
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', '${mod_id}', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            mods {
-                modid {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+apply from: 'https://raw.githubusercontent.com/RobertSkalko/ModResources/refs/heads/main/1.20.1/common.gradle'
 
 repositories {
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev/"
-        content {
-            includeGroup "mezz.jei"
-        }
-    }
-    flatDir {
-        dirs 'libs'
-    }
     maven { url = "https://maven.theillusivec4.top/" } // curios
 }
+
 dependencies {
-
-    minecraft([
-            group  : "net.minecraftforge",
-            name   : 'forge',
-            version: "$project.minecraft_version-${project.forgeversion}"
-    ])
-
-    if (System.getProperty("idea.sync.active") != "true") {
-        annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
-    }
-
-    //implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.3.1")
-    implementation fg.deobf("blank:Library_of_Exile-1.20.1:${exile_library_version}")
-
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}") //Full for runtime
-
 }
-
-
-jar {
-    manifest {
-        attributes([
-                "MixinConnector": "com.robertx22.auto_repair_kit.MixinConnector",
-                "MixinConfigs"  : "auto_repair_kit-mixins.json"
-        ])
-    }
-    finalizedBy 'reobfJar'
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-
-apply plugin: 'org.spongepowered.mixin'
-mixin {
-    add sourceSets.main, "auto_repair_kit.refmap.json"
-}
-
 
 publishMods {
-
-    file = jar.archiveFile
-    changelog = file("CHANGELOG.txt").text
-    type = BETA
-    modLoaders.add("forge")
-
-    displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
-
     curseforge {
-        accessToken = file("key.properties").text
-        projectId = "${curse_id}"
-        minecraftVersions.add("${minecraft_version}")
-        minecraftVersions.add("1.20")
         requires { slug = "library-of-exile" }
     }
     modrinth {
-        accessToken = file("modrinth_key.properties").text
-        projectId = "${modrinth_id}"
-        minecraftVersions.add("${minecraft_version}")
-        minecraftVersions.add("1.20")
+        requires { slug = "library-of-exile" }
     }
 }
+
